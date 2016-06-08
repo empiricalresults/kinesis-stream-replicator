@@ -31,7 +31,7 @@ public class Beans {
         // quick call to make sure the output stream exists
         client.describeStream(config.getKinesisOutputStream());
 
-        return new RecordProcessorFactory(config.getKinesisOutputStream(), client);
+        return new RecordProcessorFactory(config.getKinesisOutputStream(), client, config.getMaxKinesisPutRecords());
     }
 
     @Bean
@@ -49,9 +49,10 @@ public class Beans {
         c.withInitialPositionInStream(InitialPositionInStream.valueOf(config.getInitialPositionInStream()))
                 .withInitialLeaseTableReadCapacity(config.getDynamoReadCapacity())
                 .withInitialLeaseTableWriteCapacity(config.getDynamoWriteCapacity())
-                .withIdleTimeBetweenReadsInMillis(100)
                 .withMaxRecords(config.getMaxKinesisGetRecords())
-                .withRegionName(config.getInputStreamAwsRegion());
+                .withRegionName(config.getInputStreamAwsRegion())
+                .withIdleTimeBetweenReadsInMillis()
+
 
         return c;
     }

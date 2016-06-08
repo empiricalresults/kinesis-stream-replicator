@@ -19,6 +19,8 @@ public class Config {
     // max records returned per kinesis get request, default is 10k in the kcl client
     private int maxKinesisGetRecords = 10000;
 
+    private int maxKinesisPutRecords = 500;
+
     private String initialPositionInStream = "LATEST";
 
     private String inputStreamAwsRegion = "us-east-1";
@@ -135,5 +137,13 @@ public class Config {
 
     public void setKinesisOutputStream(String kinesisOutputStream) {
         this.kinesisOutputStream = kinesisOutputStream;
+    }
+
+    public int getMaxKinesisPutRecords() {
+        return maxKinesisPutRecords;
+    }
+
+    public void setMaxKinesisPutRecords(int maxKinesisPutRecords) {
+        this.maxKinesisPutRecords = maxKinesisPutRecords;
     }
 }
